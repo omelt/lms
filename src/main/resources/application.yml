@@ -1,3 +1,17 @@
+# 表示30天租期 15续租
+
+
+lms:
+  borrow-day: 30
+  renew-day: 15
+
 spring:
+  cache:
+    type: jcache
+    jcache:
+      config: classpath:ehcache.xml
+
   profiles:
     active: dev
+
+
