@@ -4,6 +4,7 @@
 lms:
   borrow-day: 30
   renew-day: 15
+  page-size: 5
 
 spring:
   cache:

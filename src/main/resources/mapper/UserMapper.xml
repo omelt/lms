@@ -9,6 +9,8 @@
         <result property="userName" column="user_name"/>
         <result property="userAge" column="user_age"/>
         <result property="userEmail" column="user_email"/>
+        <result property="userLimit" column="user_limit"/>
+        <result property="creatTime" column="gmt_creat"/>
     </resultMap>
 
     <select id="selectAll" resultMap="userMap">

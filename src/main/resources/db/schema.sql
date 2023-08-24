@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`(
 	`user_id` INT  AUTO_INCREMENT  ,
-	`user_number` VARCHAR(64)  NOT NULL  DEFAULT UUID() ,
+	`user_number` VARCHAR(64)  NOT NULL  DEFAULT UUID(),
 	`user_name` VARCHAR(30)  NOT NULL ,
     `user_email` VARCHAR(30)  NOT NULL ,
 	`user_age`  INT NOT NULL  ,
@@ -21,6 +21,7 @@ CREATE TABLE `book`(
 	`book_name`  VARCHAR(108)  NOT NULL ,
         `book_author` VARCHAR(108)  NOT NULL ,
 	`book_press`   VARCHAR(108)  NOT NULL ,
+	`book_effect`  INT NOT NULL DEFAULT 1,
        `gmt_creat`  DATE NOT NULL  DEFAULT NOW(),
 	PRIMARY KEY (`book_id`)
 );
@@ -33,11 +34,15 @@ CREATE TABLE `borrow`(
 	`book_id` INT NOT NULL  ,
 	`user_id`  INT  NOT NULL ,
     `renew` BOOLEAN NOT NULL DEFAULT FALSE,
+    `is_return` BOOLEAN NOT NULL DEFAULT FALSE,
      `borrow_date`  DATE NOT NULL  DEFAULT NOW(),
      `back_date`  DATE NOT NULL  DEFAULT NOW() ,
      `gmt_creat`  DATE NOT NULL  DEFAULT NOW(),
 	PRIMARY KEY (`borrow_id`)
 );
+CREATE INDEX `idx_bor_user_id`  ON `borrow`(`user_id` );
+CREATE INDEX `idx_bor_book_id`  ON `borrow`(`book_id` );
+
 
 --ADMIN
 DROP TABLE IF EXISTS `admin`;
@@ -49,7 +54,7 @@ CREATE TABLE `admin`(
 	`admin_age`  INT NOT NULL  ,
         `admin_username` VARCHAR(30)  NOT NULL ,
         `admin_password` VARCHAR(68)  NOT NULL ,
-	`admin_role` VARCHAR(10)  NOT NULL ,
+	`admin_role` VARCHAR(10)  NOT NULL DEFAULT 'ROLE_ADMIN',
        `gmt_creat`  DATE NOT NULL  DEFAULT NOW(),
 	PRIMARY KEY (`admin_id`)
 

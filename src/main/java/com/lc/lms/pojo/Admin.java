@@ -1,6 +1,8 @@
 package com.lc.lms.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +14,7 @@ import java.util.Collection;
 @Data
 @TableName(value = "`admin`")
 public class Admin {
+    @TableId(value = "admin_id",type = IdType.AUTO)
     private int adminId;
     private String adminNumber;
     private String adminName;

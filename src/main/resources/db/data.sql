@@ -19,3 +19,11 @@ DELETE FROM `admin`;
 INSERT INTO `admin` (`admin_name`, `admin_email`, `admin_age`,`admin_username`,`admin_password`,`admin_role`) VALUES
 ( 'TESTROOT', 'test1@TESTROOT.com', 28,'root','$2a$10$DlsATG76qxUoNH4kkZJO/.u3HXPkXczlIB/w9bNf.Lprzw0e0Ltou','ROLE_ROOT'),
 ( 'TESTADMIN', 'test1@ADMIN.com', 18,'admin','$2a$10$DlsATG76qxUoNH4kkZJO/.u3HXPkXczlIB/w9bNf.Lprzw0e0Ltou','ROLE_ADMIN');
+
+
+INSERT INTO `book` (`book_name`, `book_author`, `book_press`,`gmt_creat`,`book_effect`) VALUES
+( '幻象', '[美] 丹尼尔·布尔斯廷','南海出版公司','2021-11-18',0);
+INSERT INTO `user` (`user_name`, `user_email`, `user_age`,`gmt_creat`,`user_limit`) VALUES
+( 'borrowman', 'test1@borrowman.com', 19,'2022-02-14',2);
+INSERT INTO `borrow` (`user_id`, `book_id`,`renew`,`borrow_date`,`back_date`,`gmt_creat`) VALUES
+(6,6,TRUE,'2022-02-15','2022-04-01','2022-02-15');

@@ -31,4 +31,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         }
         return new User(admin.getAdminUsername(),admin.getAdminPassword(),admin.getRole());
     }
+
+    @Override
+    public int deleteNormalAdminByNumber(Admin admin) {
+        QueryWrapper queryWrapper=new QueryWrapper();
+        queryWrapper.eq("admin_number",admin.getAdminNumber());
+        return adminMapper.delete(queryWrapper);
+
+    }
 }

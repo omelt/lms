@@ -50,8 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
 
-                .antMatchers("/h2-console/**").anonymous()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/h2-console/**","/v2/**").anonymous()
+                .antMatchers("/h2-console/**","/v2/**").permitAll()
 
 
                 // 默认所有请求通过，但是我们要在需要权限的方法加上安全注解，这样比写死配置灵活很多
