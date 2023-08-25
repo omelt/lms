@@ -1,6 +1,9 @@
 package com.lc.lms.util;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 //作为工具使用
+@ApiIgnore
 public class ResponseEntity {
 
     public ResponseEntity() {

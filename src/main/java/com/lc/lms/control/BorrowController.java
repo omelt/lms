@@ -9,6 +9,9 @@ import com.lc.lms.pojo.Book;
 import com.lc.lms.pojo.Borrow;
 import com.lc.lms.pojo.User;
 import com.lc.lms.util.ResponseEntity;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.parameters.P;
@@ -33,6 +36,11 @@ public class BorrowController {
     @Autowired
     UserService userService;
 
+    @ApiOperation(value = "申请借书", notes = "用户借书，需要用户认证和书本")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "bookId", value = "书本id", required = true, defaultValue = ""),
+            @ApiImplicitParam(name = "userId", value = "用户id", required = true, defaultValue = "")
+    })
     @PostMapping(value = "/apply")
     public ResponseEntity borrowBook(Book book, User user){
         book=bookService.getById(book.getBookId());
@@ -50,6 +58,10 @@ public class BorrowController {
         return new ResponseEntity(HttpStatus.OK.value(), "book is not effective", null);
     }
 
+    @ApiOperation(value = "还书", notes = "归还书籍")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "bookNumber", value = "书本编号", required = true, defaultValue = ""),
+    })
     @PostMapping(value = "/back")
     public ResponseEntity backBook(Book book){
         if(borrowService.backBook(book)>0){
@@ -58,6 +70,10 @@ public class BorrowController {
         return new ResponseEntity(HttpStatus.OK.value(), "error", null);
     }
 
+    @ApiOperation(value = "续借", notes = "如果没借过可以再借一次")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "bookNumber", value = "书本编号", required = true, defaultValue = ""),
+    })
     @PostMapping(value = "/renew")
     public ResponseEntity renewBook(Book book){
         if(book.getBookNumber()==null)  return new ResponseEntity(HttpStatus.OK.value(), "error message", null);
@@ -93,6 +109,7 @@ public class BorrowController {
         return new ResponseEntity(HttpStatus.OK.value(), "error", null);
     }
 
+    @ApiOperation(value = "查看借书记录", notes = "")
     @GetMapping(value = "/all")
     public ResponseEntity allBorrow( ){
         return new ResponseEntity(HttpStatus.OK.value(), "error", borrowService.list());
